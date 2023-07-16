@@ -1,8 +1,8 @@
 <html>
     <head>
-
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body>
+    <body class="bg-blue-300">
         <form action="/articles" method="POST">
             <h1>글쓰기</h1>
 
