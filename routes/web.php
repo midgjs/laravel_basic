@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,14 @@ Route::get('/articles/create', function () {
     return view('articles/create');
 });
 
-Route::post('/articles', function () {
+Route::post('/articles', function (Request $request) {
+    $request->validate([
+        'body' => [
+            'required',
+            'string',
+            'max:255'
+        ]
+    ]);
+
     return 'hello';
 });
