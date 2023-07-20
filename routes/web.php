@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,13 +39,56 @@ Route::get('/articles/create', function () {
 });
 
 Route::post('/articles', function (Request $request) {
-    $request->validate([
+    $input = $request->validate([
         'body' => [
             'required',
             'string',
             'max:255'
         ]
     ]);
+    
+    /* 1. php
+    // db접속정보
+    $host = config('database.connections.mysql.host');
+    $dbname = config('database.connections.mysql.database');
+    $username = config('database.connections.mysql.username');
+    $password = config('database.connections.mysql.password');
+
+    // pdo 객체생성
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $stmt = $conn->prepare("INSERT INTO articles (body, user_id) values(:body, :userId)");
+
+    // 쿼리 값을 설정
+    $stmt->bindValue(':body', $input['body']);
+    $stmt->bindValue(':userId', Auth::id());
+    
+    // 실행
+    $stmt->execute();
+    */
+
+    /* 2. DB파사드 사용
+    DB::statement("INSERT INTO articles (body, user_id) values(:body, :userId)", ['body' => $input['body'], 'userId' => Auth::id()]);
+    */
+
+    /* 3. 쿼리빌더 사용
+    DB::table('articles')->insert([
+        'body' => $input['body'],
+        'user_id' => Auth::id()
+    ]);
+    */
+
+    // 4. Eloquent ORM
+    // $article = new Article;
+    // $article->body = $input['body'];
+    // $article->user_id = Auth::id();
+    // $article->save();
+
+    // 5. Eloquent ORM / fillable 적용방식(model에 추가)
+    Article::create([
+        'body' => $input['body'],
+        'user_id' => Auth::id()
+    ]);
+
 
     return 'hello';
 });
