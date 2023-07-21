@@ -89,6 +89,12 @@ Route::post('/articles', function (Request $request) {
         'user_id' => Auth::id()
     ]);
 
-
     return 'hello';
+});
+
+Route::get('articles', function() {
+    $articles = Article::all();
+    
+    return view('articles.index', ['articles' => $articles]);
+    // return view('articles.index')->with('articles', $articles);
 });
