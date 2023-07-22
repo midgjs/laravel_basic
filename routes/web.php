@@ -95,7 +95,7 @@ Route::post('/articles', function (Request $request) {
 Route::get('articles', function(Request $request) {
     $perPage = $request->input('per_page', 2);
 
-    $articles = Article::with('user') //eagerloading : user모델 접근시 쿼리실행이 아니고 미리 유저테이블 정보를 한번에 불러온다
+    $articles = Article::with('user') //eagerloading : user모델 접근시 쿼리실행(lazyloading)이 아니고 미리 유저테이블 정보를 한번에 불러온다
     ->select('body', 'user_id', 'created_at')
     ->latest()
     ->paginate($perPage);
