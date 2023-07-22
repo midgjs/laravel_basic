@@ -5,12 +5,12 @@
     <body class="bg-red-200">
         <div class="container p-5">
             <h1 class="text-2xl mb-5">글목록</h1>
-            <?foreach($articles as $article):?>
+            @foreach($articles as $article)
                 <div class="border rounded mb-3 p-3">
-                    <p><? echo $article->body;?></p>
-                    <p><? echo $article->created_at;?></p>
+                    <p>{{ $article->body }}</p>
+                    <p>{{ $article->created_at }}</p>
                 </div>
-            <?endforeach;?>    
+            @endforeach
             {{-- <? dd($articles);?> --}}
         </div>
     </body>
