@@ -96,11 +96,11 @@ Route::get('articles', function(Request $request) {
     $perPage = $request->input('per_page', 2);
 
     $articles = Article::with('user') //eagerloading : user모델 접근시 쿼리실행(lazyloading)이 아니고 미리 유저테이블 정보를 한번에 불러온다
-    ->select('body', 'user_id', 'created_at')
+    ->select('*')
     ->latest()
-    ->paginate($perPage);
-    
-    $articles->withQueryString();
+    ->paginate($perPage)
+    ->withQueryString();
+
     // $articles->appends(['filter' =>'name']);
 
     return view(
@@ -110,4 +110,9 @@ Route::get('articles', function(Request $request) {
         ]);
 
     // return view('articles.index')->with('articles', $articles);
+});
+
+Route::get('articles/{article}', function(Article $article) {
+
+    return view('articles.show', ['article' => $article]);
 });
