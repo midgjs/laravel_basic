@@ -11,7 +11,17 @@
                     <p>{{ $article->created_at }}</p>
                 </div>
             @endforeach
-            {{-- <? dd($articles);?> --}}
         </div>
+
+        {{-- 페이지네이션 --}}
+        <div class="container p-5">
+            {{ $articles->links() }}
+        </div>    
+
+
+
+
+
+            {{-- <? dd($articles);?> --}}
     </body>
 </html>
