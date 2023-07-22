@@ -93,7 +93,9 @@ Route::post('/articles', function (Request $request) {
 });
 
 Route::get('articles', function() {
-    $articles = Article::all();
+    $articles = Article::select('body', 'created_at')
+    ->latest()
+    ->get();
     
     return view('articles.index', ['articles' => $articles]);
     // return view('articles.index')->with('articles', $articles);
