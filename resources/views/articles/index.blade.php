@@ -11,7 +11,7 @@
                     {{-- todo <p>{{ $article->title }}</p> --}}
                     <p>{{ $article->body }}</p>
                     <p>{{ $article->user->name }}</p>
-                    <p><a href="/articles/{{$article->id}}">{{ $article->created_at->diffForHumans() }}</a></p>
+                    <p><a href="{{ route('articles.show', ['article' => $article->id]) }}">{{ $article->created_at->diffForHumans() }}</a></p>
                 </div>
             @endforeach
         </div>

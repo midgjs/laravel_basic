@@ -34,7 +34,8 @@
             <div class="max-w-7xl mx-auto p-6 lg:p-8">
                 메인페이지 입니다
                 <div>
-                    <a href='/articles/create'>글쓰기</a>
+                    <a href='{{ route('articles.create') }}'>글쓰기</a>
+                    <a href='{{ route('articles.index') }}'>글목록</a>
                 </div>
             </div>    
         </div>

@@ -36,7 +36,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/articles/create', function () {
     return view('articles/create');
-});
+})->name('articles.create');
 
 Route::post('/articles', function (Request $request) {
     $input = $request->validate([
@@ -90,10 +90,10 @@ Route::post('/articles', function (Request $request) {
     ]);
 
     return 'hello';
-});
+})->name('articles.store');
 
 Route::get('articles', function(Request $request) {
-    $perPage = $request->input('per_page', 2);
+    $perPage = $request->input('per_page', 3);
 
     $articles = Article::with('user') //eagerloading : user모델 접근시 쿼리실행(lazyloading)이 아니고 미리 유저테이블 정보를 한번에 불러온다
     ->select('*')
@@ -110,9 +110,9 @@ Route::get('articles', function(Request $request) {
         ]);
 
     // return view('articles.index')->with('articles', $articles);
-});
+})->name('articles.index');
 
 Route::get('articles/{article}', function(Article $article) {
 
     return view('articles.show', ['article' => $article]);
-});
+})->name('articles.show');
