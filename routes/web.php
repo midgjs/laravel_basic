@@ -134,3 +134,9 @@ Route::post('articles/{article}/update', function(Request $request, Article $art
 
     return redirect()->route('articles.index');
 })->name('articles.update');
+
+Route::post('articles/{article}/delete', function(Article $article) {
+    $article->delete();
+
+    return redirect()->route('articles.index');
+})->name('articles.delete');
