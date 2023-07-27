@@ -19,6 +19,6 @@
             
         </div>
     </form>
-            {{ dd(request()->old('body')) }}
+            {{-- {{ dd(request()->old('body')) }} --}}
     </body>
 </html>
