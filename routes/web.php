@@ -40,3 +40,5 @@ Route::controller(ArticleController::class)->group(function() {
     Route::post('articles/{article}/update', 'update')->name('articles.update');
     Route::post('articles/{article}/delete', 'delete')->name('articles.delete');
 });
+
+// Route::resource('articles', ArticleController::class)->except(['destroy','update']);
