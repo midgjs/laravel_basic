@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-    <head>
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="bg-red-200">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('글 수정하기') }}
+        </h2>
+    </x-slot>
+    
     <form action="{{ route('articles.update', ['article' => $article->id]) }}" method="POST">
         <div class="container p-5">
-            <h1 class="text-2xl">글 수정하기</h1>
             @csrf
             {{-- <input type="hidden" name="_method" value="PUT"> --}}
             {{-- @method('PUT') --}}
@@ -20,5 +21,4 @@
         </div>
     </form>
             {{-- {{ dd(request()->old('body')) }} --}}
-    </body>
-</html>
+</x-app-layout>
