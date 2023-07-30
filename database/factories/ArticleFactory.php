@@ -18,7 +18,7 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
-            'body' => fake()->paragraph(),
+            'body' => fake()->paragraph(), // paragraph(1) 만약 body 길다는 test에러나올시
             'user_id' => User::factory()
         ];
     }

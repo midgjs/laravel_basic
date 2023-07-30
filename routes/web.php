@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::controller(ArticleController::class)->group(function() {
-    Route::get('/articles/create', 'create')->name('articles.create');
+    Route::get('/articles/create', 'create')->name('articles.create'); //->->middleware('auth')
     Route::post('/articles/store', 'store')->name('articles.store');
     Route::get('articles', 'index')->name('articles.index');
     Route::get('articles/{article}', 'show')->name('articles.show');
