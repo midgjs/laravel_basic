@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\EditArticleRequest;
+use App\Http\Requests\CreateArticleRequest;
+use App\Http\Requests\DeleteArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
 
 class ArticleController extends Controller
 {   
@@ -17,14 +21,8 @@ class ArticleController extends Controller
         return view('articles/create');
     }
 
-    public function store(Request $request) {
-        $input = $request->validate([
-            'body' => [
-                'required',
-                'string',
-                'max:255'
-            ]
-        ]);
+    public function store(CreateArticleRequest $request) {
+        $input = $request->validated();
         
         /* 1. php
         // db접속정보
@@ -95,24 +93,14 @@ class ArticleController extends Controller
         return view('articles.show', ['article' => $article]);
     }
 
-    public function edit(Article $article) {
-
-        $this->authorize('update', $article);
+    public function edit(EditArticleRequest $request, Article $article) {
 
         return view('articles.edit', ['article' => $article]);
     }
 
-    public function update(Request $request, Article $article) {
+    public function update(UpdateArticleRequest $request, Article $article) {
 
-        $this->authorize('update', $article);
-
-        $input = $request->validate([
-            'body' => [
-                'required',
-                'string',
-                'max:255'
-            ]
-        ]);
+        $input = $request->validated();
     
         $article->body = $input['body'];
         $article->save();
@@ -120,9 +108,7 @@ class ArticleController extends Controller
         return redirect()->route('articles.index');
     }
 
-    public function delete(Article $article) {
-
-        $this->authorize('delete', $article);
+    public function delete(DeleteArticleRequest $request, Article $article) {
 
         $article->delete();
     
