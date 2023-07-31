@@ -96,10 +96,16 @@ class ArticleController extends Controller
     }
 
     public function edit(Article $article) {
+
+        $this->authorize('update', $article);
+
         return view('articles.edit', ['article' => $article]);
     }
 
     public function update(Request $request, Article $article) {
+
+        $this->authorize('update', $article);
+
         $input = $request->validate([
             'body' => [
                 'required',
@@ -115,6 +121,9 @@ class ArticleController extends Controller
     }
 
     public function delete(Article $article) {
+
+        $this->authorize('delete', $article);
+
         $article->delete();
     
         return redirect()->route('articles.index');
