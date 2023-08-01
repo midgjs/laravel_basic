@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -42,3 +43,5 @@ Route::controller(ArticleController::class)->group(function() {
 });
 
 // Route::resource('articles', ArticleController::class)->except(['destroy','update']);
+
+Route::resource('comments', CommentController::class);
