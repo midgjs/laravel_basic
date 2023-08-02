@@ -7,8 +7,9 @@
 
     <div class="container p-5 mx-auto">
         <div class="border rounded p-4">
-            {{ $article->body }}
-
+            <p>{{ $article->body }}</p>
+            <p>{{ $article->user->name }}</p>
+            <p>{{ $article->created_at->diffForHumans() }}</p>
             <x-article-button-group :article=$article />
         </div>
 
@@ -27,6 +28,14 @@
             <!-- 댓글 작성 폼 끝 -->
 
             <!-- 댓글 목록 시작 -->
+            <div class="mt-5 flex flex-col space-y-4">
+            @foreach($article->comments as $comment)
+                <div>
+                    <p>{{ $comment->body }}</p>
+                    <p class="text-xs text-gray-500">{{ $comment->user->name }} {{ $comment->created_at->diffForHumans() }}</p>
+                </div>
+            @endforeach
+            </div>
             <!-- 댓글 목록 끝 -->
 
         </div>
