@@ -2,15 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use Carbon\Carbon;
+use App\Models\User;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
+    public function show(User $user): View
+    {
+        $user->load('articles.user');
+        $user->articles->loadCount('comments');
+        $user->articles->loadExists([
+            'comments as recent_comments_exists' => function($query) {
+                $query->where('created_at', '>', Carbon::now()->subDay());
+            }
+        ]);
+
+        return view('profile.show', [
+            'user' => $user,
+        ]);
+    }
+
     /**
      * Display the user's profile form.
      */

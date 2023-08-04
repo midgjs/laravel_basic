@@ -45,3 +45,5 @@ Route::controller(ArticleController::class)->group(function() {
 // Route::resource('articles', ArticleController::class)->except(['destroy','update']);
 
 Route::resource('comments', CommentController::class);
+
+Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile');
