@@ -46,4 +46,6 @@ Route::controller(ArticleController::class)->group(function() {
 
 Route::resource('comments', CommentController::class);
 
-Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile');
+Route::get('profile/{user:username}', [ProfileController::class, 'show'])
+->name('profile')
+->where('user', '[A-Za-z0-9-]+');
