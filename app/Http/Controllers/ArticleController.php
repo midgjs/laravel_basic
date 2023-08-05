@@ -86,9 +86,9 @@ class ArticleController extends Controller
         // $articles->appends(['filter' =>'name']);
     
         return view('articles.index', 
-            [
-                'articles' => $articles,
-            ]);
+        [
+            'articles' => $articles,
+        ]);
     
         // return view('articles.index')->with('articles', $articles);
     }
