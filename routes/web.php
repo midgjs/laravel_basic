@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
@@ -49,3 +50,6 @@ Route::resource('comments', CommentController::class);
 Route::get('profile/{user:username}', [ProfileController::class, 'show'])
 ->name('profile')
 ->where('user', '^[ㄱ-ㅎ가-힣A-Za-z0-9-]+$');
+
+Route::post('follow/{user}', [FollowController::class, 'store'])->name('follow');
+Route::post('unfollow/{user}', [FollowController::class, 'delete'])->name('unfollow');

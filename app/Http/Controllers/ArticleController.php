@@ -80,8 +80,8 @@ class ArticleController extends Controller
                     $query->where('created_at', '>', Carbon::now()->subDay());
             }])
             ->latest()
-            ->paginate($perPage);
-        // ->withQueryString(); error
+            ->paginate($perPage)
+            ->withQueryString();
     
         // $articles->appends(['filter' =>'name']);
     
